@@ -2,11 +2,11 @@ import React, { useRef, useEffect } from 'react';
 import {
   View,
   Text,
-  ScrollView,
   type ViewStyle,
   type ColorValue,
   type TextStyle,
   type ScrollViewProps,
+  FlatList,
 } from 'react-native';
 import styles from './styles';
 import { type TMessage } from '../../types';
@@ -23,8 +23,6 @@ export type ChatListProps = {
   listScrollProps?: ScrollViewProps;
   listScrollStyle?: ViewStyle;
 } & Omit<ChatBubbleProps, 'message'>;
-
-type ScrollViewRefType = React.RefObject<ScrollView> | null;
 
 const ChatBubble: React.FC<ChatBubbleProps> = ({
   message,
@@ -67,23 +65,22 @@ const ChatList: React.FC<ChatListProps> = ({
   listScrollProps,
   listScrollStyle,
 }) => {
-  const scrollRef: ScrollViewRefType = useRef<ScrollView>(null);
+  const scrollRef = useRef<FlatList>(null);
 
   useEffect(() => {
     setTimeout(() => {
       if (scrollRef?.current) scrollRef?.current.scrollToEnd();
     }, 500);
   }, [messages]);
-
-  return (
-    <ScrollView
-      ref={scrollRef}
-      contentContainerStyle={styles.scrollViewContent}
-      style={[styles.listContainer, listScrollStyle]}
-      {...listScrollProps}
-    >
-      {!!messages &&
-        messages?.map((message) => (
+  if (messages)
+    return (
+      <FlatList
+        data={messages}
+        ref={scrollRef}
+        {...listScrollProps}
+        contentContainerStyle={styles.scrollViewContent}
+        style={[styles.listContainer, listScrollStyle]}
+        renderItem={({ item: message }) => (
           <ChatBubble
             chatBubbleColor={chatBubbleColor}
             chatBubbleStyle={chatBubbleStyle}
@@ -92,9 +89,10 @@ const ChatList: React.FC<ChatListProps> = ({
             key={message.id}
             message={message}
           />
-        ))}
-    </ScrollView>
-  );
+        )}
+      />
+    );
+  return null;
 };
 
 export default ChatList;
