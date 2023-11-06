@@ -1,9 +1,14 @@
 import React from 'react';
-import {ColorValue, TextStyle, View, ViewStyle} from 'react-native';
+import {
+  type ColorValue,
+  type TextStyle,
+  View,
+  type ViewStyle,
+} from 'react-native';
 import Header from '../Header';
-import ChatInput, {ChatInputProps} from '../ChatInput';
-import ChatList, {ChatListProps} from '../ChatList';
-import {TMessage} from '../../types';
+import ChatInput, { type ChatInputProps } from '../ChatInput';
+import ChatList, { type ChatListProps } from '../ChatList';
+import { type TMessage } from '../../types';
 
 export type ChatBoxProps = {
   name: string;
@@ -36,7 +41,7 @@ export const ChatBox: React.FC<ChatBoxProps> = ({
   CustomSend,
 }) => {
   return (
-    <View style={{height: '100%'}}>
+    <View style={{ height: '100%' }}>
       <Header
         headerColor={headerColor}
         username={name}
