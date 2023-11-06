@@ -1,5 +1,5 @@
 {
-  "name": "react-native-chat-box",
+  "name": "@devpranavsharma/react-native-chat-box",
   "version": "0.1.0",
   "description": "a fully customisable chat component",
   "main": "lib/commonjs/index",

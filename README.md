@@ -5,7 +5,7 @@ a fully customisable chat component
 ## Installation
 
 ```sh
-npm install react-native-chat-box
+npm i @devpranavsharma/react-native-chat-box
 ```
 
 ## Usage
