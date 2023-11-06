@@ -11,11 +11,23 @@ npm install react-native-chat-box
 ## Usage
 
 ```js
-import { multiply } from 'react-native-chat-box';
+import { ChatBox } from 'react-native-chat-box';
 
 // ...
 
-const result = await multiply(3, 7);
+ const [messages, setMessages] = React.useState([
+    { text: 'Hey', user: false, id: '123' },
+    { text: 'Hey! How are you', user: true, id: '124' },
+  ]);
+  return (
+    <SafeAreaView>
+      <ChatBox
+        name={'Pranav Sharma'}
+        messages={messages}
+        onSend={(message) => setMessages([...messages, message])}
+      />
+    </SafeAreaView>
+  );
 ```
 
 ## Contributing
